@@ -1,0 +1,29 @@
+name: Kernel BUILD
+on:
+  push:
+    branches:
+      - 'miui_r'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout kernel source
+      uses: actions/checkout@v2
+
+    - name: Android kernel build
+      uses: lemniskett/android-kernel-actions@master
+      id: build
+      env:
+        NAME: xiaomi-kernel
+      with:
+        arch: arm64
+        compiler: aosp-clang/master/clang-r433403
+        defconfig: stock_defconfig
+        image: Image.gz
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2.2.4
+      with:
+        name: Kernel Image
+        path: ${{ steps.build.outputs.outfile}}
