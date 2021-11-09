@@ -19,7 +19,7 @@ jobs:
       with:
         arch: arm64
         compiler: aosp-clang/master/clang-r433403
-        defconfig: stock_defconfig
+        defconfig: agni_atoll_miuiR_defconfig
         image: Image.gz
 
     - name: Upload artifacts
